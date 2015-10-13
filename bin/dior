@@ -2,4 +2,4 @@
 
 require "dior"
 
-puts "hi"
+puts "oh hi there"

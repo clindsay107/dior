@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require "dior"
+require 'dior/repl'
 
-puts "oh hi there"
+Dior::Repl.new.start

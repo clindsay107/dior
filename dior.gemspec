@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/clindsay107/dior"
   spec.license       = "GPL-3.0"
 
-  spec.files         = Dir['{lib,bin}/**/*']#{}`git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.files         = Dir['{lib,bin}/**/*']
   spec.executables   << "dior"
   spec.require_paths = ["lib"]
 

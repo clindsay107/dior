@@ -5,16 +5,20 @@ module Dior
   # See http://www.mpg123.de/mpg123/mpg123/README.remote for reference
   module API
 
-    def make_connection
+    def open_connection
       # Open mpg123 with generic remote interface
       start_cmd = 'mpg123 -R'
 
       @stdin, stdoe, wait_thr = Open3.popen2e(start_cmd)
 
-      output = Thread.new {
+      @thread = Thread.new {
         while @line = stdoe.gets
         end
       }
+    end
+
+    def close_connection
+      @thread.join
     end
 
     def load(path)

@@ -40,10 +40,6 @@ describe Dior::Player do
       @player.play
       refute(@player.paused?)
     end
-
-    it "should be able to play a track after loading" do
-      @player.do_play(File.expand_path("~/Desktop/test.mp3"))
-    end
   end
 
 end

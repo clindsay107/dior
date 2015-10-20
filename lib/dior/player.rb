@@ -2,18 +2,33 @@ require 'audite'
 
 module Dior
   class Player
-    include API
-
-    attr_reader :engine, :current_track, :queue
 
     def initialize(path = '.')
-      open_connection
-      @current_track
-      @queue = []
-      add_to_queue(path)
+      @engine = Audite.new
+      open(path)
+    end
+
+    def is_playing?
+      @engine.active || false
+    end
+
+    def play
+      @engine.start_stream
+    end
+
+    def pause
+      @engine.toggle
+    end
+
+    def stop
+      @engine.stop_stream
     end
 
     private
+
+    def open(path)
+      @engine.load(path)
+    end
 
     # Add .mp3 file or dir of .mp3s to the queue array
     def add_to_queue(path)

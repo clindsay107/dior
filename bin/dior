@@ -1,21 +1,33 @@
 #!/usr/bin/env ruby
 
-require 'dior/repl'
 require 'dior/player'
 require 'curses'
+include Curses
 
 player = Dior::Player.new('spec/resources/Mezmorized.mp3')
 
-Curses.init_screen
-Curses.noecho
-Curses.stdscr.keypad(true)
-Curses.clear
+init_screen
+noecho
+stdscr.keypad(true)
+clear
 
 player.play
 
-while c = Curses.getch
-  case c
-  when ' '
-    player.pause
+begin
+  crmode
+  setpos((lines - 5) / 2, (cols - 10) / 2)
+  addstr(player.path)
+  while c = Curses.getch
+    case c
+    when 'q'
+      break
+    when ' '
+      player.pause
+    end
   end
+ensure
+  close_screen
+  exit 0
 end
+
+player.quit

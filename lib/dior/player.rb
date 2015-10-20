@@ -3,9 +3,12 @@ require 'audite'
 module Dior
   class Player
 
+    attr_reader :path
+
     def initialize(path = '.')
       @engine = Audite.new
       open(path)
+      @path = path
     end
 
     def is_playing?
@@ -22,6 +25,11 @@ module Dior
 
     def stop
       @engine.stop_stream
+    end
+
+    def quit
+      stop
+      @engine.thread.join
     end
 
     private

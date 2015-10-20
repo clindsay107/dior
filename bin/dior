@@ -3,29 +3,51 @@
 require 'curses'
 require 'dior'
 require 'dior/player'
-require 'dior/views/splash_view'
 require 'dior/views/player_view'
-require 'dior/views/title_view'
+require 'dior/views/header_view'
 require 'dior/views/input_view'
 
 player = Dior::Player.new('spec/resources/Mezmorized.mp3')
 
+# Set up our screen
 Curses.init_screen
 Curses.noecho
+Curses.crmode
+Curses.stdscr.keypad(true)
+Curses.curs_set(0)
+Curses.clear
+
+# Build our view objects
+player_view = Dior::PlayerView.new
+header_view = Dior::HeaderView.new
+input_view  = Dior::InputView.new
 
 begin
-  Dior::SplashView.show
-  player.play
-  while c = Curses.getch
-    if c == 'q'
+  player_view.show_main
+  # sleep(1)
+  # player_view.show_main
+  header_view.show
+  input_view.show
+
+  while c = player_view.window.getch
+    case c
+    when 'q'
       break
-    elsif c == ' '
+    when ' '
       player.pause
     end
   end
 ensure
   Curses.close_screen
   exit 0
+end
+
+def render_windows
+  player_view.show_splash
+  sleep(1)
+  player_view.show_main
+  header_view.show
+  # input_view.show
 end
 
 player.quit

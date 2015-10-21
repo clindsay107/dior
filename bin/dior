@@ -2,10 +2,9 @@
 
 require 'curses'
 require 'dior'
-require 'dior/models/player'
 require 'dior/views/player_view'
 require 'dior/views/header_view'
-require 'dior/views/input_view'
+# require 'dior/models/player'
 
 player = Dior::Player.new('spec/resources')
 
@@ -19,24 +18,18 @@ Curses.clear
 # Build our view objects
 @player_view = Dior::PlayerView.new(player)
 @header_view = Dior::HeaderView.new
-@input_view  = Dior::InputView.new
-
-def render_windows
-  @header_view.show
-  @player_view.show_main
-  @input_view.show
-end
 
 # begin
-  render_windows
+@header_view.show
+@player_view.show_main
 
-  while c = @input_view.window.getch
+  while c = @player_view.window.getch
     case c
     when 'q'
       Curses.close_screen
       break
     when ' '
-      player.pause
+      @player_view.player.pause
     when 'h'
       @player_view.show_help
     end
@@ -46,4 +39,4 @@ end
 #   exit 0
 # end
 
-player.quit
+@player_view.player.quit

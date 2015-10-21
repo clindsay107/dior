@@ -1,14 +1,17 @@
 require 'audite'
+require 'dior/models/playlist'
 
 module Dior
   class Player
 
-    attr_reader :queue
+    attr_reader :queue, :playlist
 
     def initialize(path = '.')
       @engine = Audite.new
       @queue = []
+      @playlist = Playlist.new.add_from_path(path)
       add_to_queue(path)
+      open(@queue.shift)
     end
 
     def is_playing?
@@ -23,12 +26,8 @@ module Dior
       @engine.toggle
     end
 
-    def stop
-      @engine.stop_stream
-    end
-
     def quit
-      stop
+      @engine.stop_stream
       @engine.thread.join
     end
 

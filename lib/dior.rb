@@ -1,4 +1,3 @@
-require 'dior/player'
 
 module Dior
 

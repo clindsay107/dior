@@ -3,12 +3,12 @@ require 'audite'
 module Dior
   class Player
 
-    attr_reader :path
+    attr_reader :queue
 
     def initialize(path = '.')
       @engine = Audite.new
-      open(path)
-      @path = path
+      @queue = []
+      add_to_queue(path)
     end
 
     def is_playing?

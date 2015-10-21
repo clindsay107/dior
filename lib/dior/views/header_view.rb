@@ -4,6 +4,8 @@ module Dior
   # The persistent, topmost bar that displays current track information
   class HeaderView
 
+    attr_reader :window
+
     def initialize
       @header = Curses::Window.new(5, Curses.cols, 0, 0)
       @header.box("|", "_")

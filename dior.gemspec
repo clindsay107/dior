@@ -6,11 +6,11 @@ require 'dior/version'
 Gem::Specification.new do |spec|
   spec.name          = "dior"
   spec.version       = Dior::VERSION
-  spec.authors       = ["clindsay107"]
+  spec.authors       = ["strongcode"]
   spec.email         = ["clindsay107@gmail.com"]
 
   spec.summary       = "A command line music thing"
-  spec.homepage      = "https://github.com/clindsay107/dior"
+  spec.homepage      = "https://github.com/strong-code/dior"
   spec.license       = "GPL-3.0"
 
   spec.files         = Dir['{lib,bin}/**/*']
